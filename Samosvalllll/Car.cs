@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Samosvalllll
 {
-	 /*public*/ class Car : Gruzovik
+	 public class Car : Gruzovik
 	{
 		protected readonly int carWidth = 90;
 		protected readonly int carHeight = 50;

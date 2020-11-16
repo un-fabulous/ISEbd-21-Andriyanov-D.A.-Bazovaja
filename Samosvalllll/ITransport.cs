@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Samosvalllll
 {
-	/*public*/ interface ITransport
+	public interface ITransport
 	{
 		void MoveTransport(Direction direction);
 		void SetPosition(int x, int y, int width, int height);

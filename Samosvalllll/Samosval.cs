@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Samosvalllll
 {
-    /*public*/ class Samosval : Car
+    public class Samosval : Car
     {
         public Color DopColor { private set; get; }
         public bool Support { private set; get; }

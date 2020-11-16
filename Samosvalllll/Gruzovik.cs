@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Samosvalllll
 {
-	/*public*/ abstract class Gruzovik : ITransport
+	public abstract class Gruzovik : ITransport
 	{
 		protected float _startPosX;
 		protected float _startPosY;
