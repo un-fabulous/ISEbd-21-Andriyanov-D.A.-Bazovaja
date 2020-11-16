@@ -8,7 +8,7 @@ using System.Drawing;
 namespace Samosvalllll
 {
 	 public class Car : Gruzovik
-	{
+	 {
 		protected readonly int carWidth = 90;
 		protected readonly int carHeight = 50;
 		public Car(int maxSpeed, float weight, Color mainColor)

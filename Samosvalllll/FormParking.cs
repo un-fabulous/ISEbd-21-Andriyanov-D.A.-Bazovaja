@@ -13,52 +13,81 @@ namespace Samosvalllll
 {
     public partial class FormParking : Form
     {
-        private readonly Parking<Car> parking;
+        private readonly ParkingCollection parkingCollection;
         public FormParking()
         {
             InitializeComponent();
-            parking = new Parking<Car>(pictureBoxParking.Width,
+            parkingCollection = new ParkingCollection(pictureBoxParking.Width,
            pictureBoxParking.Height);
-            Draw();
+        }
+        private void ReloadLevels()
+        {
+            int index = listBoxParkings.SelectedIndex;
+            listBoxParkings.Items.Clear();
+            for (int i = 0; i < parkingCollection.Keys.Count; i++)
+            {
+                listBoxParkings.Items.Add(parkingCollection.Keys[i]);
+            }
+            if (listBoxParkings.Items.Count > 0 && (index == -1 || index >=
+           listBoxParkings.Items.Count))
+            {
+                listBoxParkings.SelectedIndex = 0;
+            }
+            else if (listBoxParkings.Items.Count > 0 && index > -1 && index <
+           listBoxParkings.Items.Count)
+            {
+                listBoxParkings.SelectedIndex = index;
+            }
         }
         private void Draw()
         {
-            Bitmap bmp = new Bitmap(pictureBoxParking.Width, pictureBoxParking.Height);
-            Graphics gr = Graphics.FromImage(bmp);
-            parking.Draw(gr);
-            pictureBoxParking.Image = bmp;
-        }
-        private void buttonSetCar_Click(object sender, EventArgs e)
-        {
-            ColorDialog dialog = new ColorDialog();
-            if (dialog.ShowDialog() == DialogResult.OK)
+            if (listBoxParkings.SelectedIndex > -1)
             {
-                var car = new Car(100, 1000, dialog.Color);
+                
+                Bitmap bmp = new Bitmap(pictureBoxParking.Width,
+                pictureBoxParking.Height);
+                Graphics gr = Graphics.FromImage(bmp);
+                parkingCollection[listBoxParkings.SelectedItem.ToString()].Draw(gr);
+                pictureBoxParking.Image = bmp;
+            }
 
-                if (parking + car)
+        }
+        private void buttonAddParking_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBoxNewLevelName.Text))
+            {
+                MessageBox.Show("Введите название парковки", "Ошибка",
+               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            parkingCollection.AddParking(textBoxNewLevelName.Text);
+            ReloadLevels();
+        }
+        private void buttonDeleteParking_Click(object sender, EventArgs e)
+        {
+            if (listBoxParkings.SelectedIndex > -1)
+            {
+                if (MessageBox.Show($"Удалить парковку { listBoxParkings.SelectedItem.ToString()}?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-
-                    Draw();
-                }
-                else
-                {
-                    MessageBox.Show("Парковка переполнена");
+                    MessageBox.Show("Парковка удалена");
+                    
+                    parkingCollection.DelParking(listBoxParkings.SelectedItem.ToString());
+                    ReloadLevels();
                 }
             }
         }
-        private void buttonSetSamosval_Click(object sender, EventArgs e)
+        private void buttonSetCar_Click(object sender, EventArgs e)
         {
-            ColorDialog dialog = new ColorDialog();
-            if (dialog.ShowDialog() == DialogResult.OK)
+            if (listBoxParkings.SelectedIndex > -1)
             {
-                ColorDialog dialogDop = new ColorDialog();
-                if (dialogDop.ShowDialog() == DialogResult.OK)
+                ColorDialog dialog = new ColorDialog();
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    var car = new Samosval(100, 1000, dialog.Color, dialogDop.Color, true, true);
-                    if (parking + car)
+                    var car = new Car(100, 1000, dialog.Color);
+                    if (parkingCollection[listBoxParkings.SelectedItem.ToString()] +
+                   car)
                     {
                         Draw();
-                        
                     }
                     else
                     {
@@ -67,11 +96,37 @@ namespace Samosvalllll
                 }
             }
         }
+
+        private void buttonSetSamosval_Click(object sender, EventArgs e)
+        {
+            if (listBoxParkings.SelectedIndex > -1)
+            {
+                ColorDialog dialog = new ColorDialog();
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    ColorDialog dialogDop = new ColorDialog();
+                    if (dialogDop.ShowDialog() == DialogResult.OK)
+                    {
+                        var car = new Samosval(100, 1000, dialog.Color,
+                       dialogDop.Color, true, true);
+                        if (parkingCollection[listBoxParkings.SelectedItem.ToString()]
+                       + car)
+                        {
+                            Draw();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Парковка переполнена");
+                        }
+                    }
+                }
+            }
+        }
         private void buttonTakeCar_Click(object sender, EventArgs e)
         {
-            if (maskedTextBox.Text != "")
+            if (listBoxParkings.SelectedIndex > -1 && maskedTextBox.Text != "")
             {
-                var car = parking - Convert.ToInt32(maskedTextBox.Text);
+                var car = parkingCollection[listBoxParkings.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBox.Text);
                 if (car != null)
                 {
                     FormCar form = new FormCar();
@@ -80,8 +135,12 @@ namespace Samosvalllll
                 }
                 Draw();
             }
-        }
 
+        }
+        private void listBoxParkings_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Draw();
+        }
 
     }
 }
