@@ -9,7 +9,7 @@ namespace Samosvalllll
     public delegate void CarDelegate(Gruzovik car);
     static class Program
     {
-       
+
         [STAThread]
         static void Main()
         {
