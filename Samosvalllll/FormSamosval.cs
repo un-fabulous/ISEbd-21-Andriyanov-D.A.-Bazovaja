@@ -10,28 +10,42 @@ using System.Windows.Forms;
 
 namespace Samosvalllll
 {
-    public partial class FormCar : Form
+   public partial class FormCar : Form
     {
         private ITransport car;
         public FormCar()
         {
             InitializeComponent();
         }
-
+        public void SetCar(ITransport car)
+        {
+            this.car = car;
+            Draw();
+        }
         private void Draw()
         {
-            Bitmap bmp = new Bitmap(pictureBoxSamosval.Width, pictureBoxSamosval.Height);
+            Bitmap bmp = new Bitmap(pictureBoxCars.Width, pictureBoxCars.Height);
             Graphics gr = Graphics.FromImage(bmp);
-            car.DrawTransport(gr);
-            pictureBoxSamosval.Image = bmp;
-
+            car?.DrawTransport(gr);
+            pictureBoxCars.Image = bmp;
         }
 
-        private void ButtonCreate_Click(object sender, EventArgs e)
+        private void buttonCreateGruzovik_Click(object sender, EventArgs e)
+        {
+            Random rnd = new Random();
+            car = new Car(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Gray);
+            car.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxCars.Width, pictureBoxCars.Height);
+            Draw();
+        }
+
+
+
+
+        private void ButtonCreateSamosval_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
             car = new Samosval(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Gray, Color.Red, true, true);
-            car.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxSamosval.Width, pictureBoxSamosval.Height);
+            car.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxCars.Width, pictureBoxCars.Height);
             Draw();
         }
 
@@ -41,35 +55,23 @@ namespace Samosvalllll
             switch (name)
             {
                 case "buttonUp":
-                   car.MoveTransport(Direction.Up);
+                   car?.MoveTransport(Direction.Up);
                     break;
                 case "buttonDown":
-                    car.MoveTransport(Direction.Down);
+                    car?.MoveTransport(Direction.Down);
                     break;
                 case "buttonLeft":
-                    car.MoveTransport(Direction.Left);
+                    car?.MoveTransport(Direction.Left);
                     break;
                 case "buttonRight":
-                   car.MoveTransport(Direction.Right);
+                   car?.MoveTransport(Direction.Right);
                     break;
             }
             Draw();
         }
 
-        private void buttonCreate_Click_1(object sender, EventArgs e)
-        {
-            Random rnd = new Random();
-            car = new Samosval(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Gray, Color.Red, true, true);
-            car.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxSamosval.Width, pictureBoxSamosval.Height);
-            Draw();
-        }
+       
 
-        private void buttonCreate2_Click(object sender, EventArgs e)
-        {
-            Random rnd = new Random();
-            car = new Car(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Gray);
-            car.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxSamosval.Width, pictureBoxSamosval.Height);
-            Draw();
-        }
+       
     }
 }
