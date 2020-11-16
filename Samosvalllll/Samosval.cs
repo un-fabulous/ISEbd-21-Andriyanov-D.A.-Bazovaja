@@ -53,12 +53,18 @@ namespace Samosvalllll
             Pen line = new Pen(MainColor, 45);
             g.DrawLine(Pens.Black, _startPosX, _startPosY + 20, _startPosX + 128, _startPosY + 20);
         }
+        public void SetDopColor(Color color)
+        {
+            DopColor = color;
+        }
     }
 
 
 
 
 }
+
+
 
 
 

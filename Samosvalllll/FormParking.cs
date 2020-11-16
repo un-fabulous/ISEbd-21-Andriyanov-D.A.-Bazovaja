@@ -76,52 +76,57 @@ namespace Samosvalllll
                 }
             }
         }
-        private void buttonSetCar_Click(object sender, EventArgs e)
-        {
-            if (listBoxParkings.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    var car = new Car(100, 1000, dialog.Color);
-                    if (parkingCollection[listBoxParkings.SelectedItem.ToString()] +
-                   car)
-                    {
-                        Draw();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Парковка переполнена");
-                    }
-                }
-            }
-        }
 
-        private void buttonSetSamosval_Click(object sender, EventArgs e)
-        {
-            if (listBoxParkings.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    ColorDialog dialogDop = new ColorDialog();
-                    if (dialogDop.ShowDialog() == DialogResult.OK)
-                    {
-                        var car = new Samosval(100, 1000, dialog.Color,
-                       dialogDop.Color, true, true);
-                        if (parkingCollection[listBoxParkings.SelectedItem.ToString()]
-                       + car)
-                        {
-                            Draw();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Парковка переполнена");
-                        }
-                    }
-                }
-            }
-        }
+
+
+
+        //private void buttonSetCar_Click(object sender, EventArgs e)
+        //{
+        //    if (listBoxParkings.SelectedIndex > -1)
+        //    {
+        //        ColorDialog dialog = new ColorDialog();
+        //        if (dialog.ShowDialog() == DialogResult.OK)
+        //        {
+        //            var car = new Car(100, 1000, dialog.Color);
+        //            if (parkingCollection[listBoxParkings.SelectedItem.ToString()] +
+        //           car)
+        //            {
+        //                Draw();
+        //            }
+        //            else
+        //            {
+        //                MessageBox.Show("Парковка переполнена");
+        //            }
+        //        }
+        //    }
+        //}
+
+        //private void buttonSetSamosval_Click(object sender, EventArgs e)
+        //{
+        //    if (listBoxParkings.SelectedIndex > -1)
+        //    {
+        //        ColorDialog dialog = new ColorDialog();
+        //        if (dialog.ShowDialog() == DialogResult.OK)
+        //        {
+        //            ColorDialog dialogDop = new ColorDialog();
+        //            if (dialogDop.ShowDialog() == DialogResult.OK)
+        //            {
+        //                var car = new Samosval(100, 1000, dialog.Color,
+        //               dialogDop.Color, true, true);
+        //                if (parkingCollection[listBoxParkings.SelectedItem.ToString()]
+        //               + car)
+        //                {
+        //                    Draw();
+        //                }
+        //                else
+        //                {
+        //                    MessageBox.Show("Парковка переполнена");
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
+
         private void buttonTakeCar_Click(object sender, EventArgs e)
         {
             if (listBoxParkings.SelectedIndex > -1 && maskedTextBox.Text != "")
@@ -141,6 +146,25 @@ namespace Samosvalllll
         {
             Draw();
         }
-
+        private void buttonSetCar_Click(object sender, EventArgs e)
+        {
+            var formCarConfig = new FormCarConfig();
+            formCarConfig.addCar += AddCar;
+            formCarConfig.Show();
+        }
+        private void AddCar(Gruzovik car)
+        {
+            if (car != null && listBoxParkings.SelectedIndex > -1)
+            {
+                if ((parkingCollection[listBoxParkings.SelectedItem.ToString()]) + car)
+                {
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Машину не удалось припарковать");
+                }
+            }
+        }
     }
 }

@@ -30,7 +30,6 @@
         {
             this.pictureBoxParking = new System.Windows.Forms.PictureBox();
             this.buttonSetCar = new System.Windows.Forms.Button();
-            this.buttonSetSamosval = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.maskedTextBox = new System.Windows.Forms.MaskedTextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -56,23 +55,13 @@
             // 
             // buttonSetCar
             // 
-            this.buttonSetCar.Location = new System.Drawing.Point(694, 254);
+            this.buttonSetCar.Location = new System.Drawing.Point(693, 254);
             this.buttonSetCar.Name = "buttonSetCar";
-            this.buttonSetCar.Size = new System.Drawing.Size(110, 34);
+            this.buttonSetCar.Size = new System.Drawing.Size(110, 78);
             this.buttonSetCar.TabIndex = 1;
-            this.buttonSetCar.Text = "Припарковать грузовик";
+            this.buttonSetCar.Text = "Припарковать автомобиль";
             this.buttonSetCar.UseVisualStyleBackColor = true;
             this.buttonSetCar.Click += new System.EventHandler(this.buttonSetCar_Click);
-            // 
-            // buttonSetSamosval
-            // 
-            this.buttonSetSamosval.Location = new System.Drawing.Point(694, 294);
-            this.buttonSetSamosval.Name = "buttonSetSamosval";
-            this.buttonSetSamosval.Size = new System.Drawing.Size(110, 38);
-            this.buttonSetSamosval.TabIndex = 2;
-            this.buttonSetSamosval.Text = "Припарковать самосвал";
-            this.buttonSetSamosval.UseVisualStyleBackColor = true;
-            this.buttonSetSamosval.Click += new System.EventHandler(this.buttonSetSamosval_Click);
             // 
             // groupBox1
             // 
@@ -178,7 +167,6 @@
             this.Controls.Add(this.textBoxNewLevelName);
             this.Controls.Add(this.listBoxParkings);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.buttonSetSamosval);
             this.Controls.Add(this.buttonSetCar);
             this.Controls.Add(this.pictureBoxParking);
             this.Name = "FormParking";
@@ -195,7 +183,6 @@
 
         private System.Windows.Forms.PictureBox pictureBoxParking;
         private System.Windows.Forms.Button buttonSetCar;
-        private System.Windows.Forms.Button buttonSetSamosval;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button buttonTakeCar;
         private System.Windows.Forms.Label label1;
