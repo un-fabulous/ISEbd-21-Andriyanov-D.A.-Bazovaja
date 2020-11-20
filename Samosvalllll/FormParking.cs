@@ -78,9 +78,6 @@ namespace Samosvalllll
         }
 
 
-
-
-       
         private void buttonTakeCar_Click(object sender, EventArgs e)
         {
             if (listBoxParkings.SelectedIndex > -1 && maskedTextBox.Text != "")
@@ -103,7 +100,7 @@ namespace Samosvalllll
         private void buttonSetCar_Click(object sender, EventArgs e)
         {
             var formCarConfig = new FormCarConfig();
-            formCarConfig.addCar += AddCar;
+            formCarConfig.AddEvent(AddCar);
             formCarConfig.Show();
         }
         private void AddCar(Gruzovik car)

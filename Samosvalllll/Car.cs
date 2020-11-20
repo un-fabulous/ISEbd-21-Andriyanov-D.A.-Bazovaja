@@ -8,7 +8,7 @@ using System.Drawing;
 namespace Samosvalllll
 {
 	 public class Car : Gruzovik
-	{
+	 {
 		protected readonly int carWidth = 90;
 		protected readonly int carHeight = 50;
 		public Car(int maxSpeed, float weight, Color mainColor)
@@ -91,7 +91,6 @@ namespace Samosvalllll
 			g.FillEllipse(circ, _startPosX + 2, _startPosY + 15, 25, 25);
 			g.FillEllipse(circ, _startPosX + 30, _startPosY + 15, 25, 25);
 			g.FillEllipse(circ, _startPosX + 100, _startPosY + 15, 25, 25);
-		}
-			
-	}
+		}		
+	 }
 }

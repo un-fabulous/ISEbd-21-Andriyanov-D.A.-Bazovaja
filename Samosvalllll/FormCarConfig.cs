@@ -14,12 +14,24 @@ namespace Samosvalllll
     {
         Gruzovik car = null;
 
-        public event Action<Gruzovik> addCar;
-        public FormCarConfig()
+		private event Action<Gruzovik> eventAddCar;
+		public FormCarConfig()
         {
             InitializeComponent();
-            buttonCancel.Click += (object sender, EventArgs e) => { Close(); };
-        }
+
+			panelRed.MouseDown +=  panelColor_MouseDown;
+			panelYellow.MouseDown += panelColor_MouseDown;
+			panelBlack.MouseDown += panelColor_MouseDown;
+			panelWhite.MouseDown += panelColor_MouseDown;
+			panelGrey.MouseDown += panelColor_MouseDown;
+			panelGold.MouseDown += panelColor_MouseDown;
+			panelGreen.MouseDown += panelColor_MouseDown;
+			panelBlue.MouseDown += panelColor_MouseDown;
+			
+
+			buttonCancel.Click += (object sender, EventArgs e) => { Close(); };                                                                                                                                                            //panelRed.MouseDown += new MouseEventHandler(panelColor_MouseDown);
+
+		}
 
         private void DrawTransport()
         {
@@ -27,17 +39,28 @@ namespace Samosvalllll
             {
                 Bitmap bmp = new Bitmap(pictureBoxCar.Width, pictureBoxCar.Height);
                 Graphics gr = Graphics.FromImage(bmp);
-                car.SetPosition(5,40, pictureBoxCar.Width, pictureBoxCar.Height);
+                car.SetPosition(15,40, pictureBoxCar.Width, pictureBoxCar.Height);
                 car.DrawTransport(gr);
                 pictureBoxCar.Image = bmp;
             }
         }
-   
-    
 
-      
+		public void AddEvent(Action<Gruzovik> e)
+		{
+			if (eventAddCar == null)
+			{
+				eventAddCar = new Action<Gruzovik>(e);
+			}
+			else
+			{
+				eventAddCar += e;
+			}
+		}
 
-        private void labelGruzovik_MouseDown(object sender, MouseEventArgs e)
+
+
+
+		private void labelGruzovik_MouseDown(object sender, MouseEventArgs e)
         {
             labelGruzovik.DoDragDrop(labelGruzovik.Text, DragDropEffects.Move |
          DragDropEffects.Copy);
@@ -60,7 +83,8 @@ namespace Samosvalllll
         }
         private void panelCar_DragDrop(object sender, DragEventArgs e)
         {
-            switch (e.Data.GetData(DataFormats.Text).ToString())
+			Object ob = e.Data.GetData(DataFormats.Text);
+			switch (e.Data.GetData(DataFormats.Text).ToString())
             {
                 case "Грузовик":
                     car = new Car((int)numericUpDownSpeed.Value, (int)numericUpDownWeight.Value, Color.White);
@@ -75,12 +99,15 @@ namespace Samosvalllll
 
         private void panelColor_MouseDown(object sender, MouseEventArgs e)
         {
-            ((Panel)sender).DoDragDrop(((Panel)sender).BackColor.Name, DragDropEffects.Move | DragDropEffects.Copy);
-        }
+			Color color = (sender as Panel).BackColor;
+			(sender as Panel).DoDragDrop(color, DragDropEffects.Move |
+            DragDropEffects.Copy);
+		
+		}
         private void labelBaseColor_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.Text.ToString()))
-            {
+			if (e.Data.GetData(typeof(Color)) != null)
+			{
                 e.Effect = DragDropEffects.Copy;
             }
             else
@@ -92,22 +119,22 @@ namespace Samosvalllll
         {
             if (car != null)
             {
-                car.SetMainColor(Color.FromName(e.Data.GetData(DataFormats.Text).ToString()));
+                car.SetMainColor((Color)e.Data.GetData(typeof(Color)));
                 DrawTransport();
             }
         }
 
         private void labelDopColor_DragDrop(object sender, DragEventArgs e)
         {
-            if (car is Samosval && car != null)
+            if (car != null && car is Samosval)
             {
-                (car as Samosval).SetDopColor(Color.FromName(e.Data.GetData(DataFormats.Text).ToString()));
-                DrawTransport();
+                (car as Samosval).SetDopColor((Color)e.Data.GetData(typeof(Color)));
+				DrawTransport();
             }
         }
         private void buttonCr_Click(object sender, EventArgs e)
         {
-            addCar?.Invoke(car);
+            eventAddCar?.Invoke(car);
             Close();
         }
     }

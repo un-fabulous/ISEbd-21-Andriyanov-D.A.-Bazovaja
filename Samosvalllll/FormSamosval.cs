@@ -68,10 +68,6 @@ namespace Samosvalllll
                     break;
             }
             Draw();
-        }
-
-       
-
-       
+        }     
     }
 }

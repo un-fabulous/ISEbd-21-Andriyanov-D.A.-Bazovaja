@@ -58,12 +58,7 @@ namespace Samosvalllll
             DopColor = color;
         }
     }
-
-
-
-
 }
-
 
 
 
