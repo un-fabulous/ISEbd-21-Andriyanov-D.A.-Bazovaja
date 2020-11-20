@@ -9,9 +9,7 @@ namespace Samosvalllll
     public delegate void CarDelegate(Gruzovik car);
     static class Program
     {
-        /// <summary>
-        /// Главная точка входа для приложения.
-        /// </summary>
+
         [STAThread]
         static void Main()
         {
