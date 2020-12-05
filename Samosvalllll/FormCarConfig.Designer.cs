@@ -33,8 +33,8 @@
             this.checkBoxCarcass = new System.Windows.Forms.CheckBox();
             this.numericUpDownWeight = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownSpeed = new System.Windows.Forms.NumericUpDown();
-            this.Weight = new System.Windows.Forms.Label();
-            this.Speed = new System.Windows.Forms.Label();
+            this.labelWeight = new System.Windows.Forms.Label();
+            this.labelSpeed = new System.Windows.Forms.Label();
             this.pictureBoxCar = new System.Windows.Forms.PictureBox();
             this.groupBoxType = new System.Windows.Forms.GroupBox();
             this.labelSamosval = new System.Windows.Forms.Label();
@@ -68,8 +68,8 @@
             this.groupBoxParams.Controls.Add(this.checkBoxCarcass);
             this.groupBoxParams.Controls.Add(this.numericUpDownWeight);
             this.groupBoxParams.Controls.Add(this.numericUpDownSpeed);
-            this.groupBoxParams.Controls.Add(this.Weight);
-            this.groupBoxParams.Controls.Add(this.Speed);
+            this.groupBoxParams.Controls.Add(this.labelWeight);
+            this.groupBoxParams.Controls.Add(this.labelSpeed);
             this.groupBoxParams.Location = new System.Drawing.Point(12, 130);
             this.groupBoxParams.Name = "groupBoxParams";
             this.groupBoxParams.Size = new System.Drawing.Size(287, 109);
@@ -141,23 +141,23 @@
             0,
             0});
             // 
-            // Weight
+            // labelWeight
             // 
-            this.Weight.AutoSize = true;
-            this.Weight.Location = new System.Drawing.Point(7, 60);
-            this.Weight.Name = "Weight";
-            this.Weight.Size = new System.Drawing.Size(55, 13);
-            this.Weight.TabIndex = 1;
-            this.Weight.Text = "Вес авто:";
+            this.labelWeight.AutoSize = true;
+            this.labelWeight.Location = new System.Drawing.Point(7, 60);
+            this.labelWeight.Name = "labelWeight";
+            this.labelWeight.Size = new System.Drawing.Size(55, 13);
+            this.labelWeight.TabIndex = 1;
+            this.labelWeight.Text = "Вес авто:";
             // 
-            // Speed
+            // labelSpeed
             // 
-            this.Speed.AutoSize = true;
-            this.Speed.Location = new System.Drawing.Point(7, 20);
-            this.Speed.Name = "Speed";
-            this.Speed.Size = new System.Drawing.Size(90, 13);
-            this.Speed.TabIndex = 0;
-            this.Speed.Text = "Макс. скорость:";
+            this.labelSpeed.AutoSize = true;
+            this.labelSpeed.Location = new System.Drawing.Point(7, 20);
+            this.labelSpeed.Name = "labelSpeed";
+            this.labelSpeed.Size = new System.Drawing.Size(90, 13);
+            this.labelSpeed.TabIndex = 0;
+            this.labelSpeed.Text = "Макс. скорость:";
             // 
             // pictureBoxCar
             // 
@@ -391,8 +391,8 @@
         private System.Windows.Forms.CheckBox checkBoxCarcass;
         private System.Windows.Forms.NumericUpDown numericUpDownWeight;
         private System.Windows.Forms.NumericUpDown numericUpDownSpeed;
-        private System.Windows.Forms.Label Weight;
-        private System.Windows.Forms.Label Speed;
+        private System.Windows.Forms.Label labelWeight;
+        private System.Windows.Forms.Label labelSpeed;
         private System.Windows.Forms.PictureBox pictureBoxCar;
         private System.Windows.Forms.GroupBox groupBoxType;
         private System.Windows.Forms.Label labelSamosval;

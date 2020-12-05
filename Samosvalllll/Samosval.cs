@@ -10,7 +10,9 @@ namespace Samosvalllll
     public class Samosval : Gruzovik
     {
         public Color DopColor { private set; get; }
+
         public bool Support { private set; get; }
+
         public bool Carcass { private set; get; }
 
         public Samosval(int maxSpeed, float weight, Color mainColor, Color dopColor, bool support, bool carcass) :
@@ -20,6 +22,21 @@ namespace Samosvalllll
             Support = support;
             Carcass = carcass;
         }
+
+        public Samosval(string info) : base(info)
+        {
+            string[] strs = info.Split(separator);
+            if (strs.Length == 6)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromName(strs[2]);
+                DopColor = Color.FromName(strs[3]);
+                Support = Convert.ToBoolean(strs[4]);
+                Carcass = Convert.ToBoolean(strs[5]);           
+            }
+        }
+
         public override void DrawTransport(Graphics g)
         {
            
@@ -53,9 +70,17 @@ namespace Samosvalllll
             Pen line = new Pen(MainColor, 45);
             g.DrawLine(Pens.Black, _startPosX, _startPosY + 20, _startPosX + 128, _startPosY + 20);
         }
+
         public void SetDopColor(Color color)
         {
             DopColor = color;
         }
+
+        public override string ToString()
+        {
+            return
+            $"{base.ToString()}{separator}{DopColor.Name}{separator}{Support}{separator}{Carcass}";
+        }
+
     }
 }

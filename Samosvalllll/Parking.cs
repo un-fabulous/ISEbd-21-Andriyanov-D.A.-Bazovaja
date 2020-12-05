@@ -11,11 +11,17 @@ namespace Samosvalllll
     public class Parking<T> where T : class, ITransport
     {
         private readonly List<T> _places;
-        private readonly int pictureWidth;
-        private readonly int pictureHeight;
-        private readonly int _placeSizeWidth = 210;
-        private readonly int _placeSizeHeight = 80;
+
         private readonly int _maxCount;
+
+        private readonly int pictureWidth;
+
+        private readonly int pictureHeight;
+
+        private readonly int _placeSizeWidth = 210;
+
+        private readonly int _placeSizeHeight = 80;
+       
         public Parking(int picWidth, int picHeight)
         {
             int width = picWidth / _placeSizeWidth;
@@ -27,6 +33,7 @@ namespace Samosvalllll
 
             _places = new List<T>();
         }
+
         public static bool operator +(Parking<T> p, T car)
         {
             if (p._places.Count >= p._maxCount)
@@ -36,6 +43,7 @@ namespace Samosvalllll
             p._places.Add(car);
             return true;
         }
+
         public static T operator -(Parking<T> p, int index)
         {
            
@@ -46,8 +54,6 @@ namespace Samosvalllll
                 T car = p._places[index];
                 p._places.RemoveAt(index);
                 return car;
-           
-
         }
 
         public void Draw(Graphics g)
@@ -55,11 +61,12 @@ namespace Samosvalllll
             DrawMarking(g);
             for (int i = 0; i < _places.Count; ++i)
             {
-                _places[i].SetPosition(13 + i / 5 * _placeSizeWidth + 5, i % 5 *
+               _places[i].SetPosition(13 + i / 5 * _placeSizeWidth + 5, i % 5 *
                _placeSizeHeight + 33, pictureWidth, pictureHeight);
-                _places[i].DrawTransport(g);
+               _places[i].DrawTransport(g);
             }
         }
+
         private void DrawMarking(Graphics g)
         {
             Pen pen = new Pen(Color.Black, 3);
@@ -73,7 +80,15 @@ namespace Samosvalllll
                 g.DrawLine(pen, i * _placeSizeWidth, 0, i * _placeSizeWidth,
                (pictureHeight / _placeSizeHeight) * _placeSizeHeight);
             }
+        }
 
+        public T GetNext(int index)
+        {
+            if (index < 0 || index >= _places.Count)
+            {
+                return null;
+            }
+            return _places[index];
         }
     }
 }

@@ -8,15 +8,31 @@ using System.Drawing;
 namespace Samosvalllll
 {
 	 public class Gruzovik : Vehicle
-	 {
+	{
 		protected readonly int carWidth = 90;
+
 		protected readonly int carHeight = 50;
+
+		protected readonly char separator = ';';
+
 		public Gruzovik(int maxSpeed, float weight, Color mainColor)
 		{
 			MaxSpeed = maxSpeed;
 			Weight = weight;
 			MainColor = mainColor;
 		}
+
+		public Gruzovik(string info)
+		{
+			string[] strs = info.Split(separator);
+			if (strs.Length == 3)
+			{
+				MaxSpeed = Convert.ToInt32(strs[0]);
+				Weight = Convert.ToInt32(strs[1]);
+				MainColor = Color.FromName(strs[2]);
+			}
+		}
+
 		protected Gruzovik(int maxSpeed, float weight, Color mainColor, int carWidth, int carHeight)
 		{
 			MaxSpeed = maxSpeed;
@@ -25,6 +41,7 @@ namespace Samosvalllll
 			this.carWidth = carWidth;
 			this.carHeight = carHeight;
 		}
+
 		public override void MoveTransport(Direction direction)
 		{
 			float step = MaxSpeed * 100 / Weight;
@@ -91,6 +108,11 @@ namespace Samosvalllll
 			g.FillEllipse(circ, _startPosX + 2, _startPosY + 15, 25, 25);
 			g.FillEllipse(circ, _startPosX + 30, _startPosY + 15, 25, 25);
 			g.FillEllipse(circ, _startPosX + 100, _startPosY + 15, 25, 25);
-		}		
-	 }
+		}
+
+		public override string ToString()
+		{
+			return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}";
+		}
+	}
 }

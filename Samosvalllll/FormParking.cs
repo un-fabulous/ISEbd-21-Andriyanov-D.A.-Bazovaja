@@ -17,12 +17,13 @@ namespace Samosvalllll
         public FormParking()
         {
             InitializeComponent();
-            parkingCollection = new ParkingCollection(pictureBoxParking.Width,
-           pictureBoxParking.Height);
+            parkingCollection = new ParkingCollection(pictureBoxParking.Width, pictureBoxParking.Height);
         }
+
         private void ReloadLevels()
         {
             int index = listBoxParkings.SelectedIndex;
+
             listBoxParkings.Items.Clear();
             for (int i = 0; i < parkingCollection.Keys.Count; i++)
             {
@@ -39,6 +40,7 @@ namespace Samosvalllll
                 listBoxParkings.SelectedIndex = index;
             }
         }
+
         private void Draw()
         {
             if (listBoxParkings.SelectedIndex > -1)
@@ -56,8 +58,7 @@ namespace Samosvalllll
         {
             if (string.IsNullOrEmpty(textBoxNewLevelName.Text))
             {
-                MessageBox.Show("Введите название гаража", "Ошибка",
-               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Введите название гаража", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             parkingCollection.AddParking(textBoxNewLevelName.Text);
@@ -93,16 +94,19 @@ namespace Samosvalllll
             }
 
         }
+
         private void listBoxParkings_SelectedIndexChanged(object sender, EventArgs e)
         {
             Draw();
         }
+
         private void buttonSetCar_Click(object sender, EventArgs e)
         {
             var formCarConfig = new FormCarConfig();
-            formCarConfig.AddEvent(AddCar);
+            formCarConfig.addCar += AddCar;
             formCarConfig.Show();
         }
+
         private void AddCar(Vehicle car)
         {
             if (car != null && listBoxParkings.SelectedIndex > -1)
@@ -114,6 +118,39 @@ namespace Samosvalllll
                 else
                 {
                     MessageBox.Show("Машину не удалось припарковать");
+                }
+            }
+        }
+
+        private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                if (parkingCollection.SaveData(saveFileDialog.FileName))
+                {
+                    MessageBox.Show("Сохранение прошло успешно", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Не сохранилось", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+
+        private void загрузитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                if (parkingCollection.LoadData(openFileDialog.FileName))
+                {
+                    MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ReloadLevels();
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

@@ -14,23 +14,20 @@ namespace Samosvalllll
     {
         Vehicle car = null;
 
-		private event Action<Vehicle> eventAddCar;
-		public FormCarConfig()
+        public event Action<Vehicle> addCar;
+        public FormCarConfig()
         {
             InitializeComponent();
-
-			panelRed.MouseDown +=  panelColor_MouseDown;
-			panelYellow.MouseDown += panelColor_MouseDown;
-			panelBlack.MouseDown += panelColor_MouseDown;
-			panelWhite.MouseDown += panelColor_MouseDown;
-			panelGray.MouseDown += panelColor_MouseDown;
-			panelGold.MouseDown += panelColor_MouseDown;
-			panelGreen.MouseDown += panelColor_MouseDown;
-			panelBlue.MouseDown += panelColor_MouseDown;
-			
-			buttonCancel.Click += (object sender, EventArgs e) => { Close(); };                                                                                                                                                            //panelRed.MouseDown += new MouseEventHandler(panelColor_MouseDown);
-
-		}
+            panelRed.MouseDown += panelColor_MouseDown;
+            panelYellow.MouseDown += panelColor_MouseDown;
+            panelBlack.MouseDown += panelColor_MouseDown;
+            panelWhite.MouseDown += panelColor_MouseDown;
+            panelGray.MouseDown += panelColor_MouseDown;
+            panelGold.MouseDown += panelColor_MouseDown;
+            panelGreen.MouseDown += panelColor_MouseDown;
+            panelBlue.MouseDown += panelColor_MouseDown;
+            buttonCancel.Click += (object sender, EventArgs e) => { Close(); };
+        }
 
         private void DrawTransport()
         {
@@ -38,25 +35,17 @@ namespace Samosvalllll
             {
                 Bitmap bmp = new Bitmap(pictureBoxCar.Width, pictureBoxCar.Height);
                 Graphics gr = Graphics.FromImage(bmp);
-                car.SetPosition(15,40, pictureBoxCar.Width, pictureBoxCar.Height);
+                car.SetPosition(5,40, pictureBoxCar.Width, pictureBoxCar.Height);
                 car.DrawTransport(gr);
                 pictureBoxCar.Image = bmp;
             }
         }
+   
+    
 
-		public void AddEvent(Action<Vehicle> e)
-		{
-			if (eventAddCar == null)
-			{
-				eventAddCar = new Action<Vehicle>(e);
-			}
-			else
-			{
-				eventAddCar += e;
-			}
-		}
+      
 
-		private void labelGruzovik_MouseDown(object sender, MouseEventArgs e)
+        private void labelGruzovik_MouseDown(object sender, MouseEventArgs e)
         {
             labelGruzovik.DoDragDrop(labelGruzovik.Text, DragDropEffects.Move |
          DragDropEffects.Copy);
@@ -79,8 +68,7 @@ namespace Samosvalllll
         }
         private void panelCar_DragDrop(object sender, DragEventArgs e)
         {
-		
-			switch (e.Data.GetData(DataFormats.Text).ToString())
+            switch (e.Data.GetData(DataFormats.Text).ToString())
             {
                 case "Грузовик":
                     car = new Gruzovik((int)numericUpDownSpeed.Value, (int)numericUpDownWeight.Value, Color.White);
@@ -95,15 +83,13 @@ namespace Samosvalllll
 
         private void panelColor_MouseDown(object sender, MouseEventArgs e)
         {
-			Color color = (sender as Panel).BackColor;
-			(sender as Panel).DoDragDrop(color, DragDropEffects.Move |
-            DragDropEffects.Copy);
-		
-		}
+            ((Panel)sender).DoDragDrop(((Panel)sender).BackColor.Name, DragDropEffects.Move | DragDropEffects.Copy);
+        }
+
         private void labelBaseColor_DragEnter(object sender, DragEventArgs e)
         {
-			if (e.Data.GetData(typeof(Color)) != null)
-			{
+            if (e.Data.GetDataPresent(DataFormats.Text.ToString()))
+            {
                 e.Effect = DragDropEffects.Copy;
             }
             else
@@ -115,22 +101,22 @@ namespace Samosvalllll
         {
             if (car != null)
             {
-                car.SetMainColor((Color)e.Data.GetData(typeof(Color)));
+                car.SetMainColor(Color.FromName(e.Data.GetData(DataFormats.Text).ToString()));
                 DrawTransport();
             }
         }
 
         private void labelDopColor_DragDrop(object sender, DragEventArgs e)
         {
-            if (car != null && car is Samosval)
+            if (car is Samosval && car != null)
             {
-                (car as Samosval).SetDopColor((Color)e.Data.GetData(typeof(Color)));
-				DrawTransport();
+                (car as Samosval).SetDopColor(Color.FromName(e.Data.GetData(DataFormats.Text).ToString()));
+                DrawTransport();
             }
         }
         private void buttonCr_Click(object sender, EventArgs e)
         {
-            eventAddCar?.Invoke(car);
+            addCar?.Invoke(car);
             Close();
         }
     }
