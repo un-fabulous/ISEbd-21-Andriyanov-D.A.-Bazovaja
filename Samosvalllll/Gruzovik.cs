@@ -8,7 +8,7 @@ using System.Drawing;
 namespace Samosvalllll
 {
 	 public class Gruzovik : Vehicle
-	{
+	 {
 		protected readonly int carWidth = 90;
 
 		protected readonly int carHeight = 50;
@@ -114,5 +114,5 @@ namespace Samosvalllll
 		{
 			return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}";
 		}
-	}
+	 }
 }

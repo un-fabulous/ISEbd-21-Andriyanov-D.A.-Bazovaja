@@ -40,10 +40,20 @@ namespace Samosvalllll
                 pictureBoxCar.Image = bmp;
             }
         }
-   
-    
 
-      
+        public void AddEvent(Action<Vehicle> e)
+        {
+            if (addCar == null)
+            {
+                addCar = new Action<Vehicle>(e);
+            }
+            else
+            {
+                addCar += e;
+            }
+        }
+
+
 
         private void labelGruzovik_MouseDown(object sender, MouseEventArgs e)
         {

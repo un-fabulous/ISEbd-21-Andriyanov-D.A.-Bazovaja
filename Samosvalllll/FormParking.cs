@@ -7,17 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using NLog;
 
 namespace Samosvalllll
 {
     public partial class FormParking : Form
     {
         private readonly ParkingCollection parkingCollection;
+
+        private readonly Logger logger;
+
         public FormParking()
         {
             InitializeComponent();
             parkingCollection = new ParkingCollection(pictureBoxParking.Width, pictureBoxParking.Height);
+            logger = LogManager.GetCurrentClassLogger();
         }
 
         private void ReloadLevels()
@@ -29,13 +33,11 @@ namespace Samosvalllll
             {
                 listBoxParkings.Items.Add(parkingCollection.Keys[i]);
             }
-            if (listBoxParkings.Items.Count > 0 && (index == -1 || index >=
-           listBoxParkings.Items.Count))
+            if (listBoxParkings.Items.Count > 0 && (index == -1 || index >= listBoxParkings.Items.Count))
             {
                 listBoxParkings.SelectedIndex = 0;
             }
-            else if (listBoxParkings.Items.Count > 0 && index > -1 && index <
-           listBoxParkings.Items.Count)
+            else if (listBoxParkings.Items.Count > 0 && index > -1 && index < listBoxParkings.Items.Count)
             {
                 listBoxParkings.SelectedIndex = index;
             }
@@ -52,17 +54,20 @@ namespace Samosvalllll
                 parkingCollection[listBoxParkings.SelectedItem.ToString()].Draw(gr);
                 pictureBoxParking.Image = bmp;
             }
-
         }
+
         private void buttonAddParking_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textBoxNewLevelName.Text))
             {
                 MessageBox.Show("Введите название гаража", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                logger.Warn("Не введено название гаража");
                 return;
             }
+            logger.Info($"Добавили гараж {textBoxNewLevelName.Text}");
             parkingCollection.AddParking(textBoxNewLevelName.Text);
             ReloadLevels();
+            textBoxNewLevelName.Text = "";
         }
         private void buttonDeleteParking_Click(object sender, EventArgs e)
         {
@@ -70,8 +75,8 @@ namespace Samosvalllll
             {
                 if (MessageBox.Show($"Удалить гараж { listBoxParkings.SelectedItem.ToString()}?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    MessageBox.Show("Гараж удален");
-                    
+
+                    logger.Info($"Удалили гараж { listBoxParkings.SelectedItem.ToString()}");
                     parkingCollection.DelParking(listBoxParkings.SelectedItem.ToString());
                     ReloadLevels();
                 }
@@ -83,27 +88,44 @@ namespace Samosvalllll
         {
             if (listBoxParkings.SelectedIndex > -1 && maskedTextBox.Text != "")
             {
-                var car = parkingCollection[listBoxParkings.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBox.Text);
-                if (car != null)
+                try
                 {
-                    FormCar form = new FormCar();
-                    form.SetCar(car);
-                    form.ShowDialog();
-                }
-                Draw();
-            }
+                     var car = parkingCollection[listBoxParkings.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBox.Text);
+                     if (car != null)
+                     {
+                       FormCar form = new FormCar();
+                       form.SetCar(car);
+                       form.ShowDialog();
 
+                       logger.Info($"Изъята машина {car} с места {maskedTextBox.Text}");
+                     }
+                     Draw();
+                }
+
+                catch (ParkingNotFoundException ex)
+                {
+                    MessageBox.Show(ex.Message, "Не найдено", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    logger.Warn("Не найдено");
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Warn("Неизвестная ошибка");
+                }
+            }
         }
 
         private void listBoxParkings_SelectedIndexChanged(object sender, EventArgs e)
         {
+            logger.Info($"Перешли в гараж { listBoxParkings.SelectedItem.ToString()}");
             Draw();
         }
 
         private void buttonSetCar_Click(object sender, EventArgs e)
         {
             var formCarConfig = new FormCarConfig();
-            formCarConfig.addCar += AddCar;
+            formCarConfig.AddEvent(AddCar);
             formCarConfig.Show();
         }
 
@@ -111,14 +133,33 @@ namespace Samosvalllll
         {
             if (car != null && listBoxParkings.SelectedIndex > -1)
             {
-                if ((parkingCollection[listBoxParkings.SelectedItem.ToString()]) + car)
-                {
+              try
+              {
+                  if ((parkingCollection[listBoxParkings.SelectedItem.ToString()]) + car)
+                  {
                     Draw();
-                }
-                else
-                {
+                    logger.Info($"Добавлена машина {car}");
+                  }
+                  else
+                  {
                     MessageBox.Show("Машину не удалось припарковать");
-                }
+                    logger.Warn("Машину не удалось поставить");
+                  }
+                    Draw();
+              }
+
+              catch (ParkingOverflowException ex)
+              {
+                 MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                 logger.Warn("Переполнение");
+              }
+
+              catch (Exception ex)
+              {
+                 MessageBox.Show(ex.Message, "Неизвестная ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                 logger.Warn("Неизвестная ошибка");
+              }
+
             }
         }
 
@@ -126,31 +167,37 @@ namespace Samosvalllll
         {
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (parkingCollection.SaveData(saveFileDialog.FileName))
+                try
                 {
+                    parkingCollection.SaveData(saveFileDialog.FileName);
                     MessageBox.Show("Сохранение прошло успешно", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    logger.Info("Сохранено в файл " + saveFileDialog.FileName);
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Не сохранилось", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Warn("Неизвестная ошибка при сохранении");
                 }
             }
         }
-
 
         private void загрузитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (parkingCollection.LoadData(openFileDialog.FileName))
-                {
+                try
+                {            
+                    parkingCollection.LoadData(openFileDialog.FileName);
                     MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    logger.Info("Загружено из файла " + openFileDialog.FileName);
                     ReloadLevels();
                     Draw();
                 }
-                else
+              
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Warn("Неизвестная ошибка при загрузке");
                 }
             }
         }

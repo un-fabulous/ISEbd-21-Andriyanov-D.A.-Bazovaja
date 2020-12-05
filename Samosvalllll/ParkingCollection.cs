@@ -50,13 +50,15 @@ namespace Samosvalllll
                     return parkingStages[ind];
                 }
                 else
-                return null;
+                {
+                    return null;
+                }
             }
         }
 
 
 
-        public bool SaveData(string filename)
+        public void SaveData(string filename)
         {
             if (File.Exists(filename))
             {
@@ -92,14 +94,14 @@ namespace Samosvalllll
                     }
                 }
             }
-            return true;
+           
         }
 
-        public bool LoadData(string filename)
+        public void LoadData(string filename)
         {
             if (!File.Exists(filename))
             {
-                return false;
+                throw new FileNotFoundException();
             }
 
             string btf = "";
@@ -114,7 +116,7 @@ namespace Samosvalllll
                 }
                 else
                 {
-                    return false;
+                    throw new FormatException();
                 }
 
                 btf = sr.ReadLine();
@@ -132,7 +134,7 @@ namespace Samosvalllll
                     btf = sr.ReadLine();
 
                     while (btf != null && (btf.Contains("Gruzovik") || btf.Contains("Samosval")))
-                    {
+                    {   
                         if (btf.Split(separator)[0] == "Gruzovik")
                         {
                             car = new Gruzovik(btf.Split(separator)[1]);
@@ -146,13 +148,13 @@ namespace Samosvalllll
 
                         if (!result)
                         {
-                            return false;
+                            throw new NullReferenceException();
                         }
 
                         btf = sr.ReadLine();
                     }
                 }
-                return true;
+              
             }
         }
     }
