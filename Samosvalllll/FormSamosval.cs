@@ -38,9 +38,6 @@ namespace Samosvalllll
             Draw();
         }
 
-
-
-
         private void ButtonCreateSamosval_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
@@ -68,10 +65,6 @@ namespace Samosvalllll
                     break;
             }
             Draw();
-        }
-
-       
-
-       
+        }   
     }
 }
