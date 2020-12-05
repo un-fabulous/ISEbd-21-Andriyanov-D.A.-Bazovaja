@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Samosvalllll
-{
-    public delegate void CarDelegate(Vehicle car);
+{ 
     static class Program
     {
         /// <summary>
