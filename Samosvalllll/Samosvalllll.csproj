@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Car.cs" />
+    <Compile Include="Gruzovik.cs" />
     <Compile Include="Directions.cs" />
     <Compile Include="FormCarConfig.cs">
       <SubType>Form</SubType>
@@ -66,7 +66,7 @@
     <Compile Include="FormSamosval.Designer.cs">
       <DependentUpon>FormSamosval.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gruzovik.cs" />
+    <Compile Include="Vehicle.cs" />
     <Compile Include="ITransport.cs" />
     <Compile Include="Parking.cs" />
     <Compile Include="ParkingCollection.cs" />

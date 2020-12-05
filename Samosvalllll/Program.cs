@@ -6,10 +6,12 @@ using System.Windows.Forms;
 
 namespace Samosvalllll
 {
-    public delegate void CarDelegate(Gruzovik car);
+    public delegate void CarDelegate(Vehicle car);
     static class Program
     {
-
+        /// <summary>
+        /// Главная точка входа для приложения.
+        /// </summary>
         [STAThread]
         static void Main()
         {

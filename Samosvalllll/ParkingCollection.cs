@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 namespace Samosvalllll
 {
      public class ParkingCollection
-    {
-        readonly Dictionary<string, Parking<Gruzovik>> parkingStages;
+     {
+        readonly Dictionary<string, Parking<Vehicle>> parkingStages;
         public List<string> Keys => parkingStages.Keys.ToList();
         private readonly int pictureWidth;
         private readonly int pictureHeight;
         public ParkingCollection(int pictureWidth, int pictureHeight)
         {
-            parkingStages = new Dictionary<string, Parking<Gruzovik>>();
+            parkingStages = new Dictionary<string, Parking<Vehicle>>();
             this.pictureWidth = pictureWidth;
             this.pictureHeight = pictureHeight;
         }
@@ -24,7 +24,7 @@ namespace Samosvalllll
             {
                 return;
             }
-            parkingStages.Add(name, new Parking<Gruzovik>(pictureWidth, pictureHeight));
+            parkingStages.Add(name, new Parking<Vehicle>(pictureWidth, pictureHeight));
         }
         public void DelParking(string name)
         {
@@ -34,7 +34,7 @@ namespace Samosvalllll
             }
         }
 
-        public Parking<Gruzovik> this[string ind]   
+        public Parking<Vehicle> this[string ind]   
         {
             get
             {
@@ -46,5 +46,5 @@ namespace Samosvalllll
                 return null; 
             }
         }
-    }
+     }
 }

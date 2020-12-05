@@ -30,18 +30,18 @@
         {
             this.pictureBoxParking = new System.Windows.Forms.PictureBox();
             this.buttonSetCar = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBoxUnparking = new System.Windows.Forms.GroupBox();
             this.maskedTextBox = new System.Windows.Forms.MaskedTextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelPlace = new System.Windows.Forms.Label();
             this.buttonTakeCar = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelTakeCar = new System.Windows.Forms.Label();
             this.listBoxParkings = new System.Windows.Forms.ListBox();
             this.textBoxNewLevelName = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.labelParking = new System.Windows.Forms.Label();
+            this.buttonAddParking = new System.Windows.Forms.Button();
+            this.buttonDelParking = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParking)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.groupBoxUnparking.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBoxParking
@@ -63,18 +63,18 @@
             this.buttonSetCar.UseVisualStyleBackColor = true;
             this.buttonSetCar.Click += new System.EventHandler(this.buttonSetCar_Click);
             // 
-            // groupBox1
+            // groupBoxUnparking
             // 
-            this.groupBox1.Controls.Add(this.maskedTextBox);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.buttonTakeCar);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(695, 338);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(110, 100);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "  ";
+            this.groupBoxUnparking.Controls.Add(this.maskedTextBox);
+            this.groupBoxUnparking.Controls.Add(this.labelPlace);
+            this.groupBoxUnparking.Controls.Add(this.buttonTakeCar);
+            this.groupBoxUnparking.Controls.Add(this.labelTakeCar);
+            this.groupBoxUnparking.Location = new System.Drawing.Point(695, 338);
+            this.groupBoxUnparking.Name = "groupBoxUnparking";
+            this.groupBoxUnparking.Size = new System.Drawing.Size(110, 100);
+            this.groupBoxUnparking.TabIndex = 3;
+            this.groupBoxUnparking.TabStop = false;
+            this.groupBoxUnparking.Text = "  ";
             // 
             // maskedTextBox
             // 
@@ -83,14 +83,14 @@
             this.maskedTextBox.Size = new System.Drawing.Size(24, 20);
             this.maskedTextBox.TabIndex = 4;
             // 
-            // label2
+            // labelPlace
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 44);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Место:";
+            this.labelPlace.AutoSize = true;
+            this.labelPlace.Location = new System.Drawing.Point(4, 44);
+            this.labelPlace.Name = "labelPlace";
+            this.labelPlace.Size = new System.Drawing.Size(42, 13);
+            this.labelPlace.TabIndex = 3;
+            this.labelPlace.Text = "Место:";
             // 
             // buttonTakeCar
             // 
@@ -102,14 +102,14 @@
             this.buttonTakeCar.UseVisualStyleBackColor = true;
             this.buttonTakeCar.Click += new System.EventHandler(this.buttonTakeCar_Click);
             // 
-            // label1
+            // labelTakeCar
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Забрать машину";
+            this.labelTakeCar.AutoSize = true;
+            this.labelTakeCar.Location = new System.Drawing.Point(6, 16);
+            this.labelTakeCar.Name = "labelTakeCar";
+            this.labelTakeCar.Size = new System.Drawing.Size(91, 13);
+            this.labelTakeCar.TabIndex = 0;
+            this.labelTakeCar.Text = "Забрать машину";
             // 
             // listBoxParkings
             // 
@@ -127,53 +127,53 @@
             this.textBoxNewLevelName.Size = new System.Drawing.Size(110, 20);
             this.textBoxNewLevelName.TabIndex = 5;
             // 
-            // label3
+            // labelParking
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(717, 29);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Парковки:";
+            this.labelParking.AutoSize = true;
+            this.labelParking.Location = new System.Drawing.Point(717, 29);
+            this.labelParking.Name = "labelParking";
+            this.labelParking.Size = new System.Drawing.Size(48, 13);
+            this.labelParking.TabIndex = 6;
+            this.labelParking.Text = "Гаражи:";
             // 
-            // button1
+            // buttonAddParking
             // 
-            this.button1.Location = new System.Drawing.Point(693, 71);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(118, 20);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Добавить парковку";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.buttonAddParking_Click);
+            this.buttonAddParking.Location = new System.Drawing.Point(693, 71);
+            this.buttonAddParking.Name = "buttonAddParking";
+            this.buttonAddParking.Size = new System.Drawing.Size(118, 20);
+            this.buttonAddParking.TabIndex = 7;
+            this.buttonAddParking.Text = "Добавить гараж";
+            this.buttonAddParking.UseVisualStyleBackColor = true;
+            this.buttonAddParking.Click += new System.EventHandler(this.buttonAddParking_Click);
             // 
-            // button2
+            // buttonDelParking
             // 
-            this.button2.Location = new System.Drawing.Point(695, 198);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(110, 23);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Удалить парковку";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.buttonDeleteParking_Click);
+            this.buttonDelParking.Location = new System.Drawing.Point(695, 198);
+            this.buttonDelParking.Name = "buttonDelParking";
+            this.buttonDelParking.Size = new System.Drawing.Size(110, 23);
+            this.buttonDelParking.TabIndex = 8;
+            this.buttonDelParking.Text = "Удалить гараж";
+            this.buttonDelParking.UseVisualStyleBackColor = true;
+            this.buttonDelParking.Click += new System.EventHandler(this.buttonDeleteParking_Click);
             // 
             // FormParking
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(816, 450);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.buttonDelParking);
+            this.Controls.Add(this.buttonAddParking);
+            this.Controls.Add(this.labelParking);
             this.Controls.Add(this.textBoxNewLevelName);
             this.Controls.Add(this.listBoxParkings);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBoxUnparking);
             this.Controls.Add(this.buttonSetCar);
             this.Controls.Add(this.pictureBoxParking);
             this.Name = "FormParking";
-            this.Text = "Парковка";
+            this.Text = "Гараж";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParking)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.groupBoxUnparking.ResumeLayout(false);
+            this.groupBoxUnparking.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -183,15 +183,15 @@
 
         private System.Windows.Forms.PictureBox pictureBoxParking;
         private System.Windows.Forms.Button buttonSetCar;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBoxUnparking;
         private System.Windows.Forms.Button buttonTakeCar;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelTakeCar;
+        private System.Windows.Forms.Label labelPlace;
         private System.Windows.Forms.MaskedTextBox maskedTextBox;
         private System.Windows.Forms.ListBox listBoxParkings;
         private System.Windows.Forms.TextBox textBoxNewLevelName;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label labelParking;
+        private System.Windows.Forms.Button buttonAddParking;
+        private System.Windows.Forms.Button buttonDelParking;
     }
 }

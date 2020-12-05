@@ -12,9 +12,9 @@ namespace Samosvalllll
 {
     public partial class FormCarConfig : Form
     {
-        Gruzovik car = null;
+        Vehicle car = null;
 
-		private event Action<Gruzovik> eventAddCar;
+		private event Action<Vehicle> eventAddCar;
 		public FormCarConfig()
         {
             InitializeComponent();
@@ -23,12 +23,11 @@ namespace Samosvalllll
 			panelYellow.MouseDown += panelColor_MouseDown;
 			panelBlack.MouseDown += panelColor_MouseDown;
 			panelWhite.MouseDown += panelColor_MouseDown;
-			panelGrey.MouseDown += panelColor_MouseDown;
+			panelGray.MouseDown += panelColor_MouseDown;
 			panelGold.MouseDown += panelColor_MouseDown;
 			panelGreen.MouseDown += panelColor_MouseDown;
 			panelBlue.MouseDown += panelColor_MouseDown;
 			
-
 			buttonCancel.Click += (object sender, EventArgs e) => { Close(); };                                                                                                                                                            //panelRed.MouseDown += new MouseEventHandler(panelColor_MouseDown);
 
 		}
@@ -45,20 +44,17 @@ namespace Samosvalllll
             }
         }
 
-		public void AddEvent(Action<Gruzovik> e)
+		public void AddEvent(Action<Vehicle> e)
 		{
 			if (eventAddCar == null)
 			{
-				eventAddCar = new Action<Gruzovik>(e);
+				eventAddCar = new Action<Vehicle>(e);
 			}
 			else
 			{
 				eventAddCar += e;
 			}
 		}
-
-
-
 
 		private void labelGruzovik_MouseDown(object sender, MouseEventArgs e)
         {
@@ -83,11 +79,11 @@ namespace Samosvalllll
         }
         private void panelCar_DragDrop(object sender, DragEventArgs e)
         {
-			Object ob = e.Data.GetData(DataFormats.Text);
+		
 			switch (e.Data.GetData(DataFormats.Text).ToString())
             {
                 case "Грузовик":
-                    car = new Car((int)numericUpDownSpeed.Value, (int)numericUpDownWeight.Value, Color.White);
+                    car = new Gruzovik((int)numericUpDownSpeed.Value, (int)numericUpDownWeight.Value, Color.White);
                     break;
                 case "Самосвал":
                     car = new Samosval((int)numericUpDownSpeed.Value, (int)numericUpDownWeight.Value, Color.White, Color.Black,

@@ -33,7 +33,7 @@ namespace Samosvalllll
         private void buttonCreateGruzovik_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            car = new Car(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Gray);
+            car = new Gruzovik(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Gray);
             car.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxCars.Width, pictureBoxCars.Height);
             Draw();
         }

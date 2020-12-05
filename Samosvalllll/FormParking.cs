@@ -56,7 +56,7 @@ namespace Samosvalllll
         {
             if (string.IsNullOrEmpty(textBoxNewLevelName.Text))
             {
-                MessageBox.Show("Введите название парковки", "Ошибка",
+                MessageBox.Show("Введите название гаража", "Ошибка",
                MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -67,9 +67,9 @@ namespace Samosvalllll
         {
             if (listBoxParkings.SelectedIndex > -1)
             {
-                if (MessageBox.Show($"Удалить парковку { listBoxParkings.SelectedItem.ToString()}?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show($"Удалить гараж { listBoxParkings.SelectedItem.ToString()}?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    MessageBox.Show("Парковка удалена");
+                    MessageBox.Show("Гараж удален");
                     
                     parkingCollection.DelParking(listBoxParkings.SelectedItem.ToString());
                     ReloadLevels();
@@ -103,7 +103,7 @@ namespace Samosvalllll
             formCarConfig.AddEvent(AddCar);
             formCarConfig.Show();
         }
-        private void AddCar(Gruzovik car)
+        private void AddCar(Vehicle car)
         {
             if (car != null && listBoxParkings.SelectedIndex > -1)
             {
