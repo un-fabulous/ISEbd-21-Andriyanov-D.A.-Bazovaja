@@ -7,8 +7,8 @@ using System.Drawing;
 
 namespace Samosvalllll
 {
-	 public class Gruzovik : Vehicle
-	 {
+	 public class Gruzovik : Vehicle, IEquatable<Gruzovik>
+	{
 		protected readonly int carWidth = 90;
 
 		protected readonly int carHeight = 50;
@@ -114,5 +114,45 @@ namespace Samosvalllll
 		{
 			return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}";
 		}
-	 }
+		public bool Equals(Gruzovik other)
+		{
+			if (other == null)
+			{
+				return false;
+			}
+			if (GetType().Name != other.GetType().Name)
+			{
+				return false;
+			}
+			if (MaxSpeed != other.MaxSpeed)
+			{
+				return false;
+			}
+			if (Weight != other.Weight)
+			{
+				return false;
+			}
+			if (MainColor != other.MainColor)
+			{
+				return false;
+			}
+			return true;
+		}
+
+		public override bool Equals(Object obj)
+		{
+			if (obj == null)
+			{
+				return false;
+			}
+			if (!(obj is Gruzovik carObj))
+			{
+				return false;
+			}
+			else
+			{
+				return Equals(carObj);
+			}
+		}
+	}
 }

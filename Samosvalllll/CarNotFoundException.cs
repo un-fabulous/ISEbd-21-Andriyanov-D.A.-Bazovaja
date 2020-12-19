@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Samosvalllll
 {
-    public class ParkingNotFoundException : Exception
+    public class CarNotFoundException : Exception
     {
-        public ParkingNotFoundException(int i) : base("Не найдена машина по месту " + i)
+        public CarNotFoundException(int i) : base("Не найдена машина по месту " + i)
         { }
     }
 
