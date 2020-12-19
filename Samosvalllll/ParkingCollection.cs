@@ -25,6 +25,7 @@ namespace Samosvalllll
             this.pictureWidth = pictureWidth;
             this.pictureHeight = pictureHeight;
         }
+
         public void AddParking(string name)
         {
             if (parkingStages.ContainsKey(name))
@@ -33,6 +34,7 @@ namespace Samosvalllll
             }
             parkingStages.Add(name, new Parking<Vehicle>(pictureWidth, pictureHeight));
         }
+
         public void DelParking(string name)
         {
             if (parkingStages.ContainsKey(name))
@@ -74,22 +76,18 @@ namespace Samosvalllll
                     {
                         sw.WriteLine($"Parking{separator}{level.Key}");
 
-                        ITransport car = null;
-
-                        for (int i = 0; (car = level.Value.GetNext(i)) != null; i++)
+                        foreach (ITransport car in level.Value)
                         {
-                            if (car != null)
+                            if (car.GetType().Name == "Gruzovik")
                             {
-                                if (car.GetType().Name == "Car")
-                                {
-                                    sw.Write($"Gruzovik{separator}");
-                                }
-                                if (car.GetType().Name == "Samosval")
-                                {
-                                    sw.Write($"Samosval{separator}");
-                                }
-                                sw.WriteLine(car);
+                                sw.Write($"Gruzovik{separator}");
                             }
+                            if (car.GetType().Name == "Samosval")
+                            {
+                                sw.Write($"Samosval{separator}");
+                            }
+
+                            sw.WriteLine(car);
                         }
                     }
                 }

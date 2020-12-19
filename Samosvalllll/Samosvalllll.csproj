@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CarComparer.cs" />
     <Compile Include="Gruzovik.cs" />
     <Compile Include="Directions.cs" />
     <Compile Include="FormCarConfig.cs">
@@ -74,11 +75,12 @@
     <Compile Include="FormSamosval.Designer.cs">
       <DependentUpon>FormSamosval.cs</DependentUpon>
     </Compile>
+    <Compile Include="ParkingAlreadyHaveException.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="ITransport.cs" />
     <Compile Include="Parking.cs" />
     <Compile Include="ParkingCollection.cs" />
-    <Compile Include="ParkingNotFoundException.cs" />
+    <Compile Include="CarNotFoundException.cs" />
     <Compile Include="ParkingOverflowException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

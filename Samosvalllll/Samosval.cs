@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Samosvalllll
 {
-    public class Samosval : Gruzovik
+    public class Samosval : Gruzovik, IEquatable<Samosval>
     {
         public Color DopColor { private set; get; }
 
@@ -81,6 +81,57 @@ namespace Samosvalllll
             return
             $"{base.ToString()}{separator}{DopColor.Name}{separator}{Support}{separator}{Carcass}";
         }
+        public bool Equals(Samosval other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+            if (GetType().Name != other.GetType().Name)
+            {
+                return false;
+            }
+            if (MaxSpeed != other.MaxSpeed)
+            {
+                return false;
+            }
+            if (Weight != other.Weight)
+            {
+                return false;
+            }
+            if (MainColor != other.MainColor)
+            {
+                return false;
+            }
+            if (DopColor != other.DopColor)
+            {
+                return false;
+            }
+            if (Support != other.Support)
+            {
+                return false;
+            }
+            if (Carcass != other.Carcass)
+            {
+                return false;
+            }        
+            return true;
+        }
 
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is Samosval carObj))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(carObj);
+            }
+        }
     }
 }
