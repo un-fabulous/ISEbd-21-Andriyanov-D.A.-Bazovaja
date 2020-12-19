@@ -146,7 +146,7 @@ namespace Samosvalllll
 
                         if (!result)
                         {
-                            throw new Exception("Не удалось загрузить машину в гараж");
+                            throw new NullReferenceException();
                         }
 
                         btf = sr.ReadLine();

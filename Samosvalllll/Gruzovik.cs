@@ -8,7 +8,7 @@ using System.Drawing;
 namespace Samosvalllll
 {
 	 public class Gruzovik : Vehicle, IEquatable<Gruzovik>
-	{
+	 {
 		protected readonly int carWidth = 90;
 
 		protected readonly int carHeight = 50;
